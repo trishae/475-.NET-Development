@@ -1,0 +1,17 @@
+﻿<Properties StartupConfiguration="{64F72977-F560-4EFD-A6EC-A24B15B0A277}|Default">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Lab2_Stocks/StockBroker.cs">
+    <Files>
+      <File FileName="Lab2_Stocks/StockApplication.cs" Line="53" Column="65" />
+      <File FileName="Lab2_Stocks/Stock.cs" Line="151" Column="22" />
+      <File FileName="Lab2_Stocks/StockBroker.cs" Line="94" Column="10" />
+      <File FileName="Lab2_Stocks/StockInfoEvent.cs" Line="27" Column="18" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MultiItemStartupConfigurations />
+  <MonoDevelop.Ide.ItemProperties.Lab2__Stocks PreferredExecutionTarget="MonoDevelop.Default" />
+</Properties>

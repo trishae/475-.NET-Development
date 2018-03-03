@@ -1,0 +1,11 @@
+/Users/trishaechual/Projects/Lab2_Stocks/Lab2_Stocks/bin/Debug/netcoreapp2.0/Lab2_Stocks.deps.json
+/Users/trishaechual/Projects/Lab2_Stocks/Lab2_Stocks/bin/Debug/netcoreapp2.0/Lab2_Stocks.runtimeconfig.json
+/Users/trishaechual/Projects/Lab2_Stocks/Lab2_Stocks/bin/Debug/netcoreapp2.0/Lab2_Stocks.runtimeconfig.dev.json
+/Users/trishaechual/Projects/Lab2_Stocks/Lab2_Stocks/bin/Debug/netcoreapp2.0/Lab2_Stocks.dll
+/Users/trishaechual/Projects/Lab2_Stocks/Lab2_Stocks/bin/Debug/netcoreapp2.0/Lab2_Stocks.pdb
+/Users/trishaechual/Projects/Lab2_Stocks/Lab2_Stocks/obj/Debug/netcoreapp2.0/Lab2_Stocks.csprojResolveAssemblyReference.cache
+/Users/trishaechual/Projects/Lab2_Stocks/Lab2_Stocks/obj/Debug/netcoreapp2.0/Lab2_Stocks.csproj.CoreCompileInputs.cache
+/Users/trishaechual/Projects/Lab2_Stocks/Lab2_Stocks/obj/Debug/netcoreapp2.0/Lab2_Stocks.AssemblyInfoInputs.cache
+/Users/trishaechual/Projects/Lab2_Stocks/Lab2_Stocks/obj/Debug/netcoreapp2.0/Lab2_Stocks.AssemblyInfo.cs
+/Users/trishaechual/Projects/Lab2_Stocks/Lab2_Stocks/obj/Debug/netcoreapp2.0/Lab2_Stocks.dll
+/Users/trishaechual/Projects/Lab2_Stocks/Lab2_Stocks/obj/Debug/netcoreapp2.0/Lab2_Stocks.pdb
