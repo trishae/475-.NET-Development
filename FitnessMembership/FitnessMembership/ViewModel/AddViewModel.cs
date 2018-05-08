@@ -1,5 +1,9 @@
-﻿using GalaSoft.MvvmLight;
+﻿using FitnessMembership.Models;
+using GalaSoft.MvvmLight;
+using GalaSoft.MvvmLight.Command;
+using GalaSoft.MvvmLight.Messaging;
 using System;
+using System.Windows;
 using System.Windows.Input;
 
 namespace FitnessMembership.ViewModel
@@ -10,23 +14,22 @@ namespace FitnessMembership.ViewModel
         private string enteredLName;
         private string enteredEmail;
 
-        public AddViewModel()
-        {
-            SaveCommand = new RelayCommand<IClosable>(SaveMethod);
-            //
-        }
-
         public ICommand SaveCommand { get; private set; }
-
         public ICommand CancelCommand { get; private set; }
 
-        public void Save(IClosable window)
+        public AddViewModel()
+        {
+            SaveCommand = new RelayCommand<IClosable>(SaveAction);
+            CancelCommand = new RelayCommand<IClosable>(CancelAction);
+        }
+
+        public void SaveAction(IClosable window)
         {
             try
             {
                 if (window != null)
                 {
-                    MessengerInstance.Default.Send();
+                    Messenger.Default.Send(new MessageMember(enteredFName, enteredLName, enteredEmail, "Add"));
                     window.Close();
                 }
             }
@@ -41,6 +44,53 @@ namespace FitnessMembership.ViewModel
             catch (FormatException)
             {
                 MessageBox.Show("Must be a valid e-mail address.", "Entry Error");
+            }
+        }
+
+        public void CancelAction(IClosable window)
+        {
+            if (window != null)
+            {
+                window.Close();
+            }
+        }
+
+        public string EnteredFName
+        {
+            get
+            {
+                return enteredFName;
+            }
+            set
+            {
+                enteredFName = value;
+                RaisePropertyChanged("EnteredFName");
+            }
+        }
+
+        public string EnteredLName
+        {
+            get
+            {
+                return enteredLName;
+            }
+            set
+            {
+                enteredLName = value;
+                RaisePropertyChanged("EnteredLName");
+            }
+        }
+
+        public string EnteredEmail
+        {
+            get
+            {
+                return enteredEmail;
+            }
+            set
+            {
+                enteredEmail = value;
+                RaisePropertyChanged("EnteredEmail");
             }
         }
     }

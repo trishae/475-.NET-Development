@@ -1,5 +1,8 @@
 using FitnessMembership.Models;
+using FitnessMembership.View;
 using GalaSoft.MvvmLight;
+using GalaSoft.MvvmLight.Command;
+using GalaSoft.MvvmLight.Messaging;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
 
@@ -16,22 +19,24 @@ namespace FitnessMembership.ViewModel
 
         private MemberDB database;
 
+        public ICommand ExitCommand { get; private set; }
+        public ICommand AddCommand { get; private set; }
+        public ICommand ChangeCommand { get; private set; }
+
         /// <summary>
         /// Initializes a new instance of the MainViewModel class.
         /// </summary>
         public MainViewModel()
         {
-            //members =
-            //database = 
+            members = new ObservableCollection<Member>();
+            database = new MemberDB(members);
             //members = database.GetMemberships();
-            //AddCommand = 
-            //ExitCommand = 
-            //ChangeCommand =
+            AddCommand = new RelayCommand<IClosable>(AddAction);
+            ExitCommand = new RelayCommand<IClosable>(ExitAction);
+            ChangeCommand = new RelayCommand(ChangeAction);
             //Messenger.Default.Register<MessageMember>(this, ReceiveMember);
-            //Messenger.Default.Register<NotificationMessage>(this.ReceiveMessage);
+            Messenger.Default.Register<NotificationMessage>(this, ReceiveMessage);
         }
-
-        public ICommand AddCommand { get; private set; }
 
         public Member SelectedMember
         {
@@ -46,13 +51,20 @@ namespace FitnessMembership.ViewModel
             }
         }
 
-        public void Add()
+        /// <summary>
+        /// 
+        /// </summary>
+        public void AddAction(IClosable window)
         {
-            AddWindow add new AddWindow();
+            AddWindow add = new AddWindow();
             add.Show();
         }
 
-        public void Exit(IClosable window)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="window"></param>
+        public void ExitAction(IClosable window)
         {
             if (window != null)
             {
@@ -60,14 +72,58 @@ namespace FitnessMembership.ViewModel
             }
         }
 
-        public void Change()
+        /// <summary>
+        /// 
+        /// </summary>
+        public void ChangeAction()
         {
             if (SelectedMember != null)
             {
                 ChangeWindow change = new ChangeWindow();
                 change.Show();
-                MessengerInstance.Default.Send();
+                Messenger.Default.Send(new ChangeViewModel());
             }
+        }
+
+        /// <summary>
+        /// Gets a new member for the list.
+        /// </summary>
+        /// <param name="m">The member to add. The message denotes how it is added.
+        /// "Update" replaces at the specified index, "Add" adds it to the list.</param>
+        public void ReceiveMember(MessageMember m)
+        {
+            if (m.Message == "Update")
+            {
+                var i = members.IndexOf(selectedMember);
+                members[i] = new Member(m.FirstName, m.LastName, m.Email);
+                database.SaveMemberships();
+            }
+            else if (m.Message == "Add")
+            {
+                members.Add(new Member(m.FirstName, m.LastName, m.Email));
+                database.SaveMemberships();
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="msg"></param>
+        public void ReceiveMessage(NotificationMessage msg)
+        {
+            if (msg.Notification == "Delete")
+            {
+                members.Remove(selectedMember);
+                database.SaveMemberships();
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public ObservableCollection<Member> MemberList
+        {
+            get { return members; }
         }
     }
 }
