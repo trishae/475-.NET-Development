@@ -29,12 +29,12 @@ namespace FitnessMembership.ViewModel
         public MainViewModel()
         {
             members = new ObservableCollection<Member>();
-            database = new MemberDB(members);
+            database = new MemberDB(MemberList);
             //members = database.GetMemberships();
             AddCommand = new RelayCommand<IClosable>(AddAction);
             ExitCommand = new RelayCommand<IClosable>(ExitAction);
             ChangeCommand = new RelayCommand(ChangeAction);
-            //Messenger.Default.Register<MessageMember>(this, ReceiveMember);
+            Messenger.Default.Register<MessageMember>(this, ReceiveMember);
             Messenger.Default.Register<NotificationMessage>(this, ReceiveMessage);
         }
 
@@ -94,16 +94,17 @@ namespace FitnessMembership.ViewModel
         {
             if (m.Message == "Update")
             {
-                var i = members.IndexOf(selectedMember);
-                members[i] = new Member(m.FirstName, m.LastName, m.Email);
+                var i = MemberList.IndexOf(selectedMember);
+                MemberList[i] = new Member(m.FirstName, m.LastName, m.Email);
                 database.SaveMemberships();
             }
             else if (m.Message == "Add")
             {
-                members.Add(new Member(m.FirstName, m.LastName, m.Email));
+                MemberList.Add(new Member(m.FirstName, m.LastName, m.Email));
                 database.SaveMemberships();
             }
-        }
+        }
+
 
         /// <summary>
         /// 
@@ -113,7 +114,7 @@ namespace FitnessMembership.ViewModel
         {
             if (msg.Notification == "Delete")
             {
-                members.Remove(selectedMember);
+                MemberList.Remove(selectedMember);
                 database.SaveMemberships();
             }
         }

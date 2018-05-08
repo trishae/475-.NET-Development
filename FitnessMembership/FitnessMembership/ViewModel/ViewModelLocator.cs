@@ -11,6 +11,7 @@
   You can also use Blend to do all this with the tool's support.
   See http://www.galasoft.ch/mvvm
 */
+using CommonServiceLocator;
 using GalaSoft.MvvmLight.Ioc;
 
 namespace FitnessMembership.ViewModel
@@ -28,10 +29,11 @@ namespace FitnessMembership.ViewModel
         {
             ServiceLocator.SetLocatorProvider(() => SimpleIoc.Default);
             SimpleIoc.Default.Register<MainViewModel>();
-            //
+            SimpleIoc.Default.Register<AddViewModel>();
+            SimpleIoc.Default.Register<ChangeViewModel>();
         }
 
-        public MainViewModel Main
+        public MainViewModel MainViewModel
         {
             get
             {
@@ -39,6 +41,22 @@ namespace FitnessMembership.ViewModel
             }
         }
         
+        public AddViewModel AddViewModel
+        {
+            get
+            {
+                return ServiceLocator.Current.GetInstance<AddViewModel>();
+            }
+        }
+
+        public ChangeViewModel ChangeViewModel
+        {
+            get
+            {
+                return ServiceLocator.Current.GetInstance<ChangeViewModel>();
+            }
+        }
+
         public static void Cleanup()
         {
             // TODO Clear the ViewModels
