@@ -62,7 +62,7 @@ namespace FitnessMembership.ViewModel
         {
             if (window != null)
             {
-                Messenger.Default.Send(new MessageMember(enteredFName, enteredLName, enteredEmail, "Delete"));
+                Messenger.Default.Send(new NotificationMessage("Delete"));
                 window.Close();
             }
         }

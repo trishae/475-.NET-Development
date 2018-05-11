@@ -96,7 +96,7 @@ namespace FitnessMembership.ViewModel
             {
                 var i = MemberList.IndexOf(selectedMember);
                 MemberList[i] = new Member(m.FirstName, m.LastName, m.Email);
-                database.SaveMemberships();
+                database.SaveMemberships(MemberList);
             }
             else if (m.Message == "Add")
             {
