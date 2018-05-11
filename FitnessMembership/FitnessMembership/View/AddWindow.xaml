@@ -9,23 +9,21 @@
         DataContext="{Binding Source={StaticResource Locator}, Path=AddViewModel}">
     <Grid Background="#FFECEAEA">
         <Label Grid.Row="1" Grid.Column="1" Content="First Name:" Grid.ColumnSpan="3" />
-        <TextBox Grid.Row="1" Grid.Column="3" Text="{Binding SelectedEmployee.EnteredFName}"/>
+        <TextBox Grid.Row="1" Grid.Column="3" Text="{Binding EnteredFName, UpdateSourceTrigger=PropertyChanged}"/>
 
         <Label Grid.Row="3" Grid.Column="1" Content="Last Name:" Grid.ColumnSpan="3" />
-        <TextBox Grid.Row="3" Grid.Column="3" Text="{Binding SelectedEmployee.EnteredLName}"/>
+        <TextBox Grid.Row="3" Grid.Column="3" Text="{Binding EnteredLName, UpdateSourceTrigger=PropertyChanged}"/>
 
         <Label Grid.Row="5" Grid.Column="1" Content="Email:" Grid.ColumnSpan="3" />
-        <TextBox Grid.Row="5" Grid.Column="3" Text="{Binding SelectedEmployee.EnteredEmail}"/>
+        <TextBox Grid.Row="5" Grid.Column="3" Text="{Binding EnteredEmail, UpdateSourceTrigger=PropertyChanged}"/>
 
         <Button x:Name="saveButton" Content="Save" Grid.Row ="6" Grid.Column ="3"
-            HorizontalAlignment="Left" VerticalAlignment="Top" Width="100" Margin="0,35,0,0"/>
+            Command="{Binding SaveCommand, Mode=OneWay}" CommandParameter="{Binding ElementName=AddViewWindow}"
+            HorizontalAlignment="Left" VerticalAlignment="Top" Width="100" Margin="0,35,0,0" Height="20"/>
 
         <Button x:Name="cancelButton" Content="Cancel" Grid.Row ="6" Grid.Column ="3"
-            HorizontalAlignment="Right" VerticalAlignment="Top" Width="100" Margin="0,35,0,0"/>
-        
-        <!--<Button x:Name="button" Content="Add" Grid.Row ="1" Grid.Column ="1"
-            Command="{Binding AddAction}" CommandParameter="{Binding ElementName=mainWindow}" 
-            HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="0,50,0,0"/>-->
+            Command="{Binding CancelCommand, Mode=OneWay}" CommandParameter="{Binding ElementName=AddViewWindow}"
+            HorizontalAlignment="Right" VerticalAlignment="Top" Width="100" Margin="0,35,0,0" Height="20"/>
 
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="53"/>
@@ -36,12 +34,12 @@
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="44*"/>
-            <RowDefinition Height="36"/>
-            <RowDefinition Height="19"/>
-            <RowDefinition Height="33"/>
-            <RowDefinition Height="19"/>
-            <RowDefinition Height="33"/>
-            <RowDefinition Height="100"/>
+            <RowDefinition Height="25"/>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="25"/>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="25"/>
+            <RowDefinition Height="107"/>
             <RowDefinition Height="35*"/>
         </Grid.RowDefinitions>
     </Grid>

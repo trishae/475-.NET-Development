@@ -1,7 +1,7 @@
 ﻿using FitnessMembership.ViewModel;
 using System.Windows;
 
-namespace FitnessMembership
+namespace FitnessMembership.View
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
@@ -10,7 +10,8 @@ namespace FitnessMembership
     {
         public MainWindow()
         {
-            // InitializeComponent();
+            InitializeComponent();
+            // DataContext = this;
         }
     }
 }

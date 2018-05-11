@@ -13,7 +13,7 @@ namespace FitnessMembership.ViewModel
     /// </summary>
     public class MainViewModel : ViewModelBase
     {
-        private ObservableCollection<Member> members;
+        private ObservableCollection<Member> memberList;
 
         private Member selectedMember;
 
@@ -28,10 +28,10 @@ namespace FitnessMembership.ViewModel
         /// </summary>
         public MainViewModel()
         {
-            members = new ObservableCollection<Member>();
-            database = new MemberDB(MemberList);
+            memberList = new ObservableCollection<Member>();
+            database = new MemberDB(memberList);
             //members = database.GetMemberships();
-            AddCommand = new RelayCommand<IClosable>(AddAction);
+            AddCommand = new RelayCommand(AddAction);
             ExitCommand = new RelayCommand<IClosable>(ExitAction);
             ChangeCommand = new RelayCommand(ChangeAction);
             Messenger.Default.Register<MessageMember>(this, ReceiveMember);
@@ -54,7 +54,7 @@ namespace FitnessMembership.ViewModel
         /// <summary>
         /// 
         /// </summary>
-        public void AddAction(IClosable window)
+        public void AddAction()
         {
             AddWindow add = new AddWindow();
             add.Show();
@@ -101,7 +101,7 @@ namespace FitnessMembership.ViewModel
             else if (m.Message == "Add")
             {
                 MemberList.Add(new Member(m.FirstName, m.LastName, m.Email));
-                database.SaveMemberships();
+                database.SaveMemberships(MemberList);
             }
         }
 
@@ -124,7 +124,7 @@ namespace FitnessMembership.ViewModel
         /// </summary>
         public ObservableCollection<Member> MemberList
         {
-            get { return members; }
+            get { return database.GetMemberships(); }
         }
     }
 }

@@ -11,6 +11,10 @@ namespace FitnessMembership.Models
 
         private const string filepath = "../members.txt";
 
+        public MemberDB()
+        {
+        }
+
         public MemberDB(ObservableCollection<Member> m)
         {
             members = m;
@@ -42,11 +46,45 @@ namespace FitnessMembership.Models
         /// <summary>
         /// 
         /// </summary>
+        public void SaveMemberships(ObservableCollection<Member> newMembers)
+        {
+            try
+            {
+                using (StreamWriter output = new StreamWriter(new FileStream(filepath, FileMode.OpenOrCreate, FileAccess.Write)))
+                {
+                    foreach(Member m in newMembers)
+                    {
+                        output.Write(m.GetDisplayText());
+                        output.WriteLine();
+                    }
+                }
+            }
+            catch (Exception)
+            {
+                Console.WriteLine("");
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
         public void SaveMemberships()
         {
-            StreamWriter output = new StreamWriter(new FileStream(filepath, FileMode.Create, FileAccess.Write));
-
-            output.Close();
+            try
+            {
+                using (StreamWriter output = new StreamWriter(new FileStream(filepath, FileMode.OpenOrCreate, FileAccess.Write)))
+                {
+                    foreach (Member m in members)
+                    {
+                        output.Write(m.GetDisplayText());
+                        output.WriteLine();
+                    }
+                }
+            }
+            catch (Exception)
+            {
+                Console.WriteLine("");
+            }
         }
     }
 }
